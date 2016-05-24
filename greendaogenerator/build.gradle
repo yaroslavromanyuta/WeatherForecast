@@ -1,0 +1,10 @@
+apply plugin: 'application'
+apply plugin: 'java'
+
+mainClassName = "yaroslavromanyuta.com.ua.weatherforecast.DbGenerator"
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'org.greenrobot:greendao-generator:2.2.0'
+    compile 'freemarker:freemarker:2.3.9'
+}
