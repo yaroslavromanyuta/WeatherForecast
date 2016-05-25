@@ -14,7 +14,7 @@ import de.greenrobot.dao.DaoException;
 public class City {
 
     private Long id;
-    private Integer cityId;
+    private String name;
     private Double lon;
     private Double lat;
     private String country;
@@ -37,9 +37,9 @@ public class City {
         this.id = id;
     }
 
-    public City(Long id, Integer cityId, Double lon, Double lat, String country) {
+    public City(Long id, String name, Double lon, Double lat, String country) {
         this.id = id;
-        this.cityId = cityId;
+        this.name = name;
         this.lon = lon;
         this.lat = lat;
         this.country = country;
@@ -59,12 +59,12 @@ public class City {
         this.id = id;
     }
 
-    public Integer getCityId() {
-        return cityId;
+    public String getName() {
+        return name;
     }
 
-    public void setCityId(Integer cityId) {
-        this.cityId = cityId;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Double getLon() {

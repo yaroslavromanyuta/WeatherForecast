@@ -21,8 +21,8 @@ public class Weather {
     private String description;
     private String icon;
     private Integer clouds;
-    private Integer windSec;
-    private Integer windDeg;
+    private Double windSpeed;
+    private Double windDeg;
     private Integer rain;
     private Integer snow;
     private Long cityId;
@@ -47,7 +47,7 @@ public class Weather {
         this.id = id;
     }
 
-    public Weather(Long id, java.util.Date date, Double temp, Double pressure, Integer humidity, String main, String description, String icon, Integer clouds, Integer windSec, Integer windDeg, Integer rain, Integer snow, Long cityId) {
+    public Weather(Long id, java.util.Date date, Double temp, Double pressure, Integer humidity, String main, String description, String icon, Integer clouds, Double windSpeed, Double windDeg, Integer rain, Integer snow, Long cityId) {
         this.id = id;
         this.date = date;
         this.temp = temp;
@@ -57,7 +57,7 @@ public class Weather {
         this.description = description;
         this.icon = icon;
         this.clouds = clouds;
-        this.windSec = windSec;
+        this.windSpeed = windSpeed;
         this.windDeg = windDeg;
         this.rain = rain;
         this.snow = snow;
@@ -142,19 +142,19 @@ public class Weather {
         this.clouds = clouds;
     }
 
-    public Integer getWindSec() {
-        return windSec;
+    public Double getWindSpeed() {
+        return windSpeed;
     }
 
-    public void setWindSec(Integer windSec) {
-        this.windSec = windSec;
+    public void setWindSpeed(Double windSpeed) {
+        this.windSpeed = windSpeed;
     }
 
-    public Integer getWindDeg() {
+    public Double getWindDeg() {
         return windDeg;
     }
 
-    public void setWindDeg(Integer windDeg) {
+    public void setWindDeg(Double windDeg) {
         this.windDeg = windDeg;
     }
 

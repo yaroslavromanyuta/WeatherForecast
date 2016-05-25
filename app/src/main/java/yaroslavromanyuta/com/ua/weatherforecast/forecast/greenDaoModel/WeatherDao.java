@@ -37,8 +37,8 @@ public class WeatherDao extends AbstractDao<Weather, Long> {
         public final static Property Description = new Property(6, String.class, "description", false, "DESCRIPTION");
         public final static Property Icon = new Property(7, String.class, "icon", false, "ICON");
         public final static Property Clouds = new Property(8, Integer.class, "clouds", false, "CLOUDS");
-        public final static Property WindSec = new Property(9, Integer.class, "windSec", false, "WIND_SEC");
-        public final static Property WindDeg = new Property(10, Integer.class, "windDeg", false, "WIND_DEG");
+        public final static Property WindSpeed = new Property(9, Double.class, "windSpeed", false, "WIND_SPEED");
+        public final static Property WindDeg = new Property(10, Double.class, "windDeg", false, "WIND_DEG");
         public final static Property Rain = new Property(11, Integer.class, "rain", false, "RAIN");
         public final static Property Snow = new Property(12, Integer.class, "snow", false, "SNOW");
         public final static Property CityId = new Property(13, Long.class, "cityId", false, "CITY_ID");
@@ -70,8 +70,8 @@ public class WeatherDao extends AbstractDao<Weather, Long> {
                 "\"DESCRIPTION\" TEXT," + // 6: description
                 "\"ICON\" TEXT," + // 7: icon
                 "\"CLOUDS\" INTEGER," + // 8: clouds
-                "\"WIND_SEC\" INTEGER," + // 9: windSec
-                "\"WIND_DEG\" INTEGER," + // 10: windDeg
+                "\"WIND_SPEED\" REAL," + // 9: windSpeed
+                "\"WIND_DEG\" REAL," + // 10: windDeg
                 "\"RAIN\" INTEGER," + // 11: rain
                 "\"SNOW\" INTEGER," + // 12: snow
                 "\"CITY_ID\" INTEGER);"); // 13: cityId
@@ -133,14 +133,14 @@ public class WeatherDao extends AbstractDao<Weather, Long> {
             stmt.bindLong(9, clouds);
         }
  
-        Integer windSec = entity.getWindSec();
-        if (windSec != null) {
-            stmt.bindLong(10, windSec);
+        Double windSpeed = entity.getWindSpeed();
+        if (windSpeed != null) {
+            stmt.bindDouble(10, windSpeed);
         }
  
-        Integer windDeg = entity.getWindDeg();
+        Double windDeg = entity.getWindDeg();
         if (windDeg != null) {
-            stmt.bindLong(11, windDeg);
+            stmt.bindDouble(11, windDeg);
         }
  
         Integer rain = entity.getRain();
@@ -184,8 +184,8 @@ public class WeatherDao extends AbstractDao<Weather, Long> {
             cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // description
             cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // icon
             cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8), // clouds
-            cursor.isNull(offset + 9) ? null : cursor.getInt(offset + 9), // windSec
-            cursor.isNull(offset + 10) ? null : cursor.getInt(offset + 10), // windDeg
+            cursor.isNull(offset + 9) ? null : cursor.getDouble(offset + 9), // windSpeed
+            cursor.isNull(offset + 10) ? null : cursor.getDouble(offset + 10), // windDeg
             cursor.isNull(offset + 11) ? null : cursor.getInt(offset + 11), // rain
             cursor.isNull(offset + 12) ? null : cursor.getInt(offset + 12), // snow
             cursor.isNull(offset + 13) ? null : cursor.getLong(offset + 13) // cityId
@@ -205,8 +205,8 @@ public class WeatherDao extends AbstractDao<Weather, Long> {
         entity.setDescription(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
         entity.setIcon(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
         entity.setClouds(cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8));
-        entity.setWindSec(cursor.isNull(offset + 9) ? null : cursor.getInt(offset + 9));
-        entity.setWindDeg(cursor.isNull(offset + 10) ? null : cursor.getInt(offset + 10));
+        entity.setWindSpeed(cursor.isNull(offset + 9) ? null : cursor.getDouble(offset + 9));
+        entity.setWindDeg(cursor.isNull(offset + 10) ? null : cursor.getDouble(offset + 10));
         entity.setRain(cursor.isNull(offset + 11) ? null : cursor.getInt(offset + 11));
         entity.setSnow(cursor.isNull(offset + 12) ? null : cursor.getInt(offset + 12));
         entity.setCityId(cursor.isNull(offset + 13) ? null : cursor.getLong(offset + 13));

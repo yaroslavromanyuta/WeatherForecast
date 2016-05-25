@@ -24,7 +24,7 @@ public class CityDao extends AbstractDao<City, Long> {
     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property CityId = new Property(1, Integer.class, "cityId", false, "CITY_ID");
+        public final static Property Name = new Property(1, String.class, "name", false, "NAME");
         public final static Property Lon = new Property(2, Double.class, "lon", false, "LON");
         public final static Property Lat = new Property(3, Double.class, "lat", false, "LAT");
         public final static Property Country = new Property(4, String.class, "country", false, "COUNTRY");
@@ -47,7 +47,7 @@ public class CityDao extends AbstractDao<City, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"CITY\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
-                "\"CITY_ID\" INTEGER," + // 1: cityId
+                "\"NAME\" TEXT," + // 1: name
                 "\"LON\" REAL," + // 2: lon
                 "\"LAT\" REAL," + // 3: lat
                 "\"COUNTRY\" TEXT);"); // 4: country
@@ -69,9 +69,9 @@ public class CityDao extends AbstractDao<City, Long> {
             stmt.bindLong(1, id);
         }
  
-        Integer cityId = entity.getCityId();
-        if (cityId != null) {
-            stmt.bindLong(2, cityId);
+        String name = entity.getName();
+        if (name != null) {
+            stmt.bindString(2, name);
         }
  
         Double lon = entity.getLon();
@@ -107,7 +107,7 @@ public class CityDao extends AbstractDao<City, Long> {
     public City readEntity(Cursor cursor, int offset) {
         City entity = new City( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1), // cityId
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
             cursor.isNull(offset + 2) ? null : cursor.getDouble(offset + 2), // lon
             cursor.isNull(offset + 3) ? null : cursor.getDouble(offset + 3), // lat
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // country
@@ -119,7 +119,7 @@ public class CityDao extends AbstractDao<City, Long> {
     @Override
     public void readEntity(Cursor cursor, City entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setCityId(cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1));
+        entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setLon(cursor.isNull(offset + 2) ? null : cursor.getDouble(offset + 2));
         entity.setLat(cursor.isNull(offset + 3) ? null : cursor.getDouble(offset + 3));
         entity.setCountry(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
