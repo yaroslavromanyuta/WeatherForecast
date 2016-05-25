@@ -11,6 +11,6 @@ import yaroslavromanyuta.com.ua.weatherforecast.forecast.greenDaoModel.ForecastR
 public interface OpenWeatherServise {
     @GET("forecast")
     Call<ForecastResponce> getForecastByLocation(@Query("appid") String apiKey,
-                                                 @Query("lon") double longtitude,
-                                                 @Query("lat") double latitude);
+                                                 @Query("lat") double latitude,
+                                                 @Query("lon") double longtitude);
 }
