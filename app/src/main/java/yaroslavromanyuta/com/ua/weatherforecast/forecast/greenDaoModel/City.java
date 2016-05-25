@@ -138,6 +138,13 @@ public class City {
     }
 
     // KEEP METHODS - put your custom methods here
+
+    @Override
+    public String toString() {
+        String string = "City:  name - " + name + ", country - " + country + ", lat - " + lat + ", lon - " + lon + ", id - " +id;
+        return string;
+    }
+
     // KEEP METHODS END
 
 }

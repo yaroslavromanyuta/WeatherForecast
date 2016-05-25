@@ -9,7 +9,7 @@ import yaroslavromanyuta.com.ua.weatherforecast.forecast.greenDaoModel.ForecastR
  * Created by Yaroslav on 25.05.2016.
  */
 public interface OpenWeatherServise {
-    @GET("forecast")
+    @GET("/data/2.5/forecast")
     Call<ForecastResponce> getForecastByLocation(@Query("appid") String apiKey,
                                                  @Query("lat") double latitude,
                                                  @Query("lon") double longtitude);

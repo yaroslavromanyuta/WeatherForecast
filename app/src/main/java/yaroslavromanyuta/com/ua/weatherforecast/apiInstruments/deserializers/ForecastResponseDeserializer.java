@@ -29,6 +29,8 @@ public class ForecastResponseDeserializer implements JsonDeserializer<ForecastRe
     @Override
     public ForecastResponce deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 
+        Log.d(TAG, "deserialize() called with: " + "json = [" + json + "], typeOfT = [" + typeOfT + "], context = [" + context + "]");
+
         JsonObject response = json.getAsJsonObject();
 
         City city = new City();
@@ -49,12 +51,12 @@ public class ForecastResponseDeserializer implements JsonDeserializer<ForecastRe
 
             JsonObject jsonWeather = jsonWeatherList.get(i).getAsJsonObject();
 
-            weather.setId(jsonWeather.get("dt").getAsLong());
+            weather.setId(Long.parseLong(jsonWeather.get("dt").getAsString() + String.valueOf(city.getId())));
             JsonObject jsonMain = jsonWeather.getAsJsonObject("main");
             weather.setTemp(jsonMain.get("temp").getAsDouble());
             weather.setPressure(jsonMain.get("pressure").getAsDouble());
             weather.setHumidity(jsonMain.get("humidity").getAsInt());
-            JsonObject jsonWeatherDescription = jsonWeather.getAsJsonObject("weather");
+            JsonObject jsonWeatherDescription = jsonWeather.getAsJsonArray("weather").get(0).getAsJsonObject();
             weather.setMain(jsonWeatherDescription.get("main").getAsString());
             weather.setDescription(jsonWeatherDescription.get("description").getAsString());
             weather.setIcon(jsonWeatherDescription.get("icon").getAsString());
@@ -62,8 +64,11 @@ public class ForecastResponseDeserializer implements JsonDeserializer<ForecastRe
             JsonObject jsonWind = jsonWeather.getAsJsonObject("wind");
             weather.setWindSpeed(jsonWind.get("speed").getAsDouble());
             weather.setWindDeg(jsonWind.get("deg").getAsDouble());
-            weather.setRain(jsonWeather.getAsJsonObject("rain").get("3h").getAsInt());
-            weather.setSnow(jsonWeather.getAsJsonObject("snow").get("3h").getAsInt());
+            try {
+                weather.setRain(jsonWeather.getAsJsonObject("rain").get("3h").getAsInt());
+                weather.setSnow(jsonWeather.getAsJsonObject("snow").get("3h").getAsInt());
+            } catch (Exception ignored){}
+
 
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date date = new Date();
@@ -75,9 +80,11 @@ public class ForecastResponseDeserializer implements JsonDeserializer<ForecastRe
             }
             weather.setDate(date);
 
-            weatherList.set(i,weather);
+            weatherList.add(i,weather);
 
         }
+
+
 
         return new ForecastResponce(city, weatherList);
     }

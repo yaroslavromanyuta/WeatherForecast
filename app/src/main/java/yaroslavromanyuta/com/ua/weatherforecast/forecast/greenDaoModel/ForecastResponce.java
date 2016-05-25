@@ -38,4 +38,11 @@ public class ForecastResponce {
     public void setWeather(List<Weather> weather) {
         this.weather = weather;
     }
+
+    @Override
+    public String toString() {
+
+        String string = "Forecast resp for " + city.getName();
+        return string;
+    }
 }

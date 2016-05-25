@@ -51,9 +51,8 @@ import static yaroslavromanyuta.com.ua.weatherforecast.Constants.*;
 
         Log.d(TAG, "getResponse: " + "response created. HTTP status code= " + response.code() + "; message= " + response.message() +
                 "; success = " + response.isSuccessful() );
+        Log.d(TAG, "getResponse() returned: " + response);
 
-        ForecastResponce foorecastResponse = response.body();
-
-        return foorecastResponse;
+        return response.body();
     }
 }
