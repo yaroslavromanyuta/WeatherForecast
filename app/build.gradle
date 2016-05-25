@@ -24,7 +24,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.google.code.gson:gson:2.6.2'
-    compile 'javax.annotation:javax.annotation-api:1.2'
-    compile 'javax.validation:validation-api:1.1.0.Final'
     compile 'org.greenrobot:greendao:2.2.1'
+    compile 'com.squareup.retrofit2:retrofit:2.0.2'
+    compile 'com.squareup.retrofit2:retrofit-converters:2.0.2'
 }
