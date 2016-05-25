@@ -13,7 +13,7 @@ public class DbGenerator {
 
         Entity city = schema.addEntity("City");
         city.addIdProperty();
-        city.addIntProperty("cityId");
+        city.addStringProperty("name");
         city.addDoubleProperty("lon");
         city.addDoubleProperty("lat");
         city.addStringProperty("country");
@@ -28,8 +28,8 @@ public class DbGenerator {
         weather.addStringProperty("description");
         weather.addStringProperty("icon");
         weather.addIntProperty("clouds");
-        weather.addIntProperty("windSec");
-        weather.addIntProperty("windDeg");
+        weather.addDoubleProperty("windSpeed");
+        weather.addDoubleProperty("windDeg");
         weather.addIntProperty("rain");
         weather.addIntProperty("snow");
 
