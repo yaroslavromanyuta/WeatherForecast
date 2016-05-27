@@ -57,7 +57,7 @@ public class RequestController extends AsyncTask<Location, Void, ForecastResponc
 
         dataUpdater = new DataUpdater(daoSession, forecastResponce);
         dataUpdater.updateData();
-        requestCallBack.RequestFinished();
+        requestCallBack.RequestFinished(forecastResponce.getCity());
 
         Log.d(TAG, "onPostExecute() called with: " + "forecastResponce = [" + forecastResponce + "]");
 
