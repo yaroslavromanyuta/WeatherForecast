@@ -39,7 +39,7 @@ public class RequestController extends AsyncTask<Location, Void, ForecastResponc
         Location location = params[0];
         ForecastResponce forecastResponce = new ForecastResponce();
         try {
-            forecastResponce = responseGetter.getResponse(location.getLatitude(), location.getLongitude());
+            forecastResponce = responseGetter.getForecastResponse(location.getLatitude(), location.getLongitude());
         } catch (IOException e) {
             e.printStackTrace();
         }

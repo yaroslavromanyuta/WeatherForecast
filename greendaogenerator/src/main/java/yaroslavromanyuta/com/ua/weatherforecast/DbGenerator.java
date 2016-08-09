@@ -17,6 +17,15 @@ public class DbGenerator {
         city.addDoubleProperty("lon");
         city.addDoubleProperty("lat");
         city.addStringProperty("country");
+        city.addStringProperty("main");
+        city.addStringProperty("description");
+        city.addDoubleProperty("temp");
+        city.addDoubleProperty("pressure");
+        city.addIntProperty("humidity");
+        city.addDoubleProperty("windSpeed");
+        city.addDoubleProperty("windDeg");
+        city.addDateProperty("sunrise");
+        city.addDateProperty("sunset");
 
         Entity weather = schema.addEntity("Weather");
         weather.addIdProperty();

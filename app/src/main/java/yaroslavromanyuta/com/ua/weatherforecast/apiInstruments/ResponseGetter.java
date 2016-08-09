@@ -16,18 +16,25 @@ import yaroslavromanyuta.com.ua.weatherforecast.R;
 import yaroslavromanyuta.com.ua.weatherforecast.apiInstruments.deserializers.ForecastResponseDeserializer;
 import yaroslavromanyuta.com.ua.weatherforecast.forecast.greenDaoModel.ForecastResponce;
 
-import static yaroslavromanyuta.com.ua.weatherforecast.Constants.*;
+import static yaroslavromanyuta.com.ua.weatherforecast.Constants.TAG;
 
 /**
  * Created by Yaroslav on 25.05.2016.
  */
  class ResponseGetter {
 
-    OpenWeatherServise openWeatherServise;
     Context context;
 
     ResponseGetter(Context context){
         this.context = context;
+
+
+    }
+
+
+    public ForecastResponce getForecastResponse(double latitude, double longitude) throws IOException {
+
+        OpenWeatherServise openWeatherServise;
 
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(ForecastResponce.class, new ForecastResponseDeserializer())
@@ -39,20 +46,18 @@ import static yaroslavromanyuta.com.ua.weatherforecast.Constants.*;
                 .build();
 
         openWeatherServise = retrofit.create(OpenWeatherServise.class);
-    }
 
-
-    public ForecastResponce getResponse (double latitude, double longitude) throws IOException {
         Call<ForecastResponce> call = openWeatherServise.getForecastByLocation(context.getString(R.string.api_key),
                                                                                         latitude, longitude);
 
         Response<ForecastResponce> response = null;
         response = call.execute();
 
-        Log.d(TAG, "getResponse: " + "response created. HTTP status code= " + response.code() + "; message= " + response.message() +
+        Log.d(TAG, "getForecastResponse: " + "response created. HTTP status code= " + response.code() + "; message= " + response.message() +
                 "; success = " + response.isSuccessful() );
-        Log.d(TAG, "getResponse() returned: " + response);
+        Log.d(TAG, "getForecastResponse() returned: " + response);
 
         return response.body();
     }
+
 }

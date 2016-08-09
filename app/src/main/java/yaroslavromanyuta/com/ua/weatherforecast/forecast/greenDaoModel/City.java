@@ -18,6 +18,15 @@ public class City {
     private Double lon;
     private Double lat;
     private String country;
+    private String main;
+    private String description;
+    private Double temp;
+    private Double pressure;
+    private Integer humidity;
+    private Double windSpeed;
+    private Double windDeg;
+    private java.util.Date sunrise;
+    private java.util.Date sunset;
 
     /** Used to resolve relations */
     private transient DaoSession daoSession;
@@ -37,12 +46,21 @@ public class City {
         this.id = id;
     }
 
-    public City(Long id, String name, Double lon, Double lat, String country) {
+    public City(Long id, String name, Double lon, Double lat, String country, String main, String description, Double temp, Double pressure, Integer humidity, Double windSpeed, Double windDeg, java.util.Date sunrise, java.util.Date sunset) {
         this.id = id;
         this.name = name;
         this.lon = lon;
         this.lat = lat;
         this.country = country;
+        this.main = main;
+        this.description = description;
+        this.temp = temp;
+        this.pressure = pressure;
+        this.humidity = humidity;
+        this.windSpeed = windSpeed;
+        this.windDeg = windDeg;
+        this.sunrise = sunrise;
+        this.sunset = sunset;
     }
 
     /** called by internal mechanisms, do not call yourself. */
@@ -89,6 +107,78 @@ public class City {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public String getMain() {
+        return main;
+    }
+
+    public void setMain(String main) {
+        this.main = main;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Double getTemp() {
+        return temp;
+    }
+
+    public void setTemp(Double temp) {
+        this.temp = temp;
+    }
+
+    public Double getPressure() {
+        return pressure;
+    }
+
+    public void setPressure(Double pressure) {
+        this.pressure = pressure;
+    }
+
+    public Integer getHumidity() {
+        return humidity;
+    }
+
+    public void setHumidity(Integer humidity) {
+        this.humidity = humidity;
+    }
+
+    public Double getWindSpeed() {
+        return windSpeed;
+    }
+
+    public void setWindSpeed(Double windSpeed) {
+        this.windSpeed = windSpeed;
+    }
+
+    public Double getWindDeg() {
+        return windDeg;
+    }
+
+    public void setWindDeg(Double windDeg) {
+        this.windDeg = windDeg;
+    }
+
+    public java.util.Date getSunrise() {
+        return sunrise;
+    }
+
+    public void setSunrise(java.util.Date sunrise) {
+        this.sunrise = sunrise;
+    }
+
+    public java.util.Date getSunset() {
+        return sunset;
+    }
+
+    public void setSunset(java.util.Date sunset) {
+        this.sunset = sunset;
     }
 
     /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
@@ -144,7 +234,6 @@ public class City {
         String string = "City:  name - " + name + ", country - " + country + ", lat - " + lat + ", lon - " + lon + ", id - " +id;
         return string;
     }
-
     // KEEP METHODS END
 
 }

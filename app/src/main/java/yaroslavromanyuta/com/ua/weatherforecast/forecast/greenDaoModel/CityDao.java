@@ -28,6 +28,15 @@ public class CityDao extends AbstractDao<City, Long> {
         public final static Property Lon = new Property(2, Double.class, "lon", false, "LON");
         public final static Property Lat = new Property(3, Double.class, "lat", false, "LAT");
         public final static Property Country = new Property(4, String.class, "country", false, "COUNTRY");
+        public final static Property Main = new Property(5, String.class, "main", false, "MAIN");
+        public final static Property Description = new Property(6, String.class, "description", false, "DESCRIPTION");
+        public final static Property Temp = new Property(7, Double.class, "temp", false, "TEMP");
+        public final static Property Pressure = new Property(8, Double.class, "pressure", false, "PRESSURE");
+        public final static Property Humidity = new Property(9, Integer.class, "humidity", false, "HUMIDITY");
+        public final static Property WindSpeed = new Property(10, Double.class, "windSpeed", false, "WIND_SPEED");
+        public final static Property WindDeg = new Property(11, Double.class, "windDeg", false, "WIND_DEG");
+        public final static Property Sunrise = new Property(12, java.util.Date.class, "sunrise", false, "SUNRISE");
+        public final static Property Sunset = new Property(13, java.util.Date.class, "sunset", false, "SUNSET");
     };
 
     private DaoSession daoSession;
@@ -50,7 +59,16 @@ public class CityDao extends AbstractDao<City, Long> {
                 "\"NAME\" TEXT," + // 1: name
                 "\"LON\" REAL," + // 2: lon
                 "\"LAT\" REAL," + // 3: lat
-                "\"COUNTRY\" TEXT);"); // 4: country
+                "\"COUNTRY\" TEXT," + // 4: country
+                "\"MAIN\" TEXT," + // 5: main
+                "\"DESCRIPTION\" TEXT," + // 6: description
+                "\"TEMP\" REAL," + // 7: temp
+                "\"PRESSURE\" REAL," + // 8: pressure
+                "\"HUMIDITY\" INTEGER," + // 9: humidity
+                "\"WIND_SPEED\" REAL," + // 10: windSpeed
+                "\"WIND_DEG\" REAL," + // 11: windDeg
+                "\"SUNRISE\" INTEGER," + // 12: sunrise
+                "\"SUNSET\" INTEGER);"); // 13: sunset
     }
 
     /** Drops the underlying database table. */
@@ -88,6 +106,51 @@ public class CityDao extends AbstractDao<City, Long> {
         if (country != null) {
             stmt.bindString(5, country);
         }
+ 
+        String main = entity.getMain();
+        if (main != null) {
+            stmt.bindString(6, main);
+        }
+ 
+        String description = entity.getDescription();
+        if (description != null) {
+            stmt.bindString(7, description);
+        }
+ 
+        Double temp = entity.getTemp();
+        if (temp != null) {
+            stmt.bindDouble(8, temp);
+        }
+ 
+        Double pressure = entity.getPressure();
+        if (pressure != null) {
+            stmt.bindDouble(9, pressure);
+        }
+ 
+        Integer humidity = entity.getHumidity();
+        if (humidity != null) {
+            stmt.bindLong(10, humidity);
+        }
+ 
+        Double windSpeed = entity.getWindSpeed();
+        if (windSpeed != null) {
+            stmt.bindDouble(11, windSpeed);
+        }
+ 
+        Double windDeg = entity.getWindDeg();
+        if (windDeg != null) {
+            stmt.bindDouble(12, windDeg);
+        }
+ 
+        java.util.Date sunrise = entity.getSunrise();
+        if (sunrise != null) {
+            stmt.bindLong(13, sunrise.getTime());
+        }
+ 
+        java.util.Date sunset = entity.getSunset();
+        if (sunset != null) {
+            stmt.bindLong(14, sunset.getTime());
+        }
     }
 
     @Override
@@ -110,7 +173,16 @@ public class CityDao extends AbstractDao<City, Long> {
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
             cursor.isNull(offset + 2) ? null : cursor.getDouble(offset + 2), // lon
             cursor.isNull(offset + 3) ? null : cursor.getDouble(offset + 3), // lat
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // country
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // country
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // main
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // description
+            cursor.isNull(offset + 7) ? null : cursor.getDouble(offset + 7), // temp
+            cursor.isNull(offset + 8) ? null : cursor.getDouble(offset + 8), // pressure
+            cursor.isNull(offset + 9) ? null : cursor.getInt(offset + 9), // humidity
+            cursor.isNull(offset + 10) ? null : cursor.getDouble(offset + 10), // windSpeed
+            cursor.isNull(offset + 11) ? null : cursor.getDouble(offset + 11), // windDeg
+            cursor.isNull(offset + 12) ? null : new java.util.Date(cursor.getLong(offset + 12)), // sunrise
+            cursor.isNull(offset + 13) ? null : new java.util.Date(cursor.getLong(offset + 13)) // sunset
         );
         return entity;
     }
@@ -123,6 +195,15 @@ public class CityDao extends AbstractDao<City, Long> {
         entity.setLon(cursor.isNull(offset + 2) ? null : cursor.getDouble(offset + 2));
         entity.setLat(cursor.isNull(offset + 3) ? null : cursor.getDouble(offset + 3));
         entity.setCountry(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setMain(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setDescription(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setTemp(cursor.isNull(offset + 7) ? null : cursor.getDouble(offset + 7));
+        entity.setPressure(cursor.isNull(offset + 8) ? null : cursor.getDouble(offset + 8));
+        entity.setHumidity(cursor.isNull(offset + 9) ? null : cursor.getInt(offset + 9));
+        entity.setWindSpeed(cursor.isNull(offset + 10) ? null : cursor.getDouble(offset + 10));
+        entity.setWindDeg(cursor.isNull(offset + 11) ? null : cursor.getDouble(offset + 11));
+        entity.setSunrise(cursor.isNull(offset + 12) ? null : new java.util.Date(cursor.getLong(offset + 12)));
+        entity.setSunset(cursor.isNull(offset + 13) ? null : new java.util.Date(cursor.getLong(offset + 13)));
      }
     
     /** @inheritdoc */

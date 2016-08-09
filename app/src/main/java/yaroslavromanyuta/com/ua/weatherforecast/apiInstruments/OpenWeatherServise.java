@@ -3,6 +3,7 @@ package yaroslavromanyuta.com.ua.weatherforecast.apiInstruments;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
+import yaroslavromanyuta.com.ua.weatherforecast.forecast.greenDaoModel.City;
 import yaroslavromanyuta.com.ua.weatherforecast.forecast.greenDaoModel.ForecastResponce;
 
 /**
@@ -13,4 +14,8 @@ public interface OpenWeatherServise {
     Call<ForecastResponce> getForecastByLocation(@Query("appid") String apiKey,
                                                  @Query("lat") double latitude,
                                                  @Query("lon") double longtitude);
+    @GET("/data/2.5/weather")
+    Call<City> getCityByLocation(@Query("appid") String apiKey,
+                                     @Query("lat") double latitude,
+                                     @Query("lon") double longtitude);
 }
